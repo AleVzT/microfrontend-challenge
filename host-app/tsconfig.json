@@ -1,0 +1,14 @@
+{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+  ],
+  "compilerOptions": {
+    "types": ["vite/client"],
+    "baseUrl": ".",
+    "jsx": "react-jsx",
+    "paths": {
+      "rickApp/*": ["./node_modules/rickApp/*"]
+    }
+  },
+}
