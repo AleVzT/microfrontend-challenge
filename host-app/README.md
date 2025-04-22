@@ -82,7 +82,7 @@ npm run test
 3. Inicia el entorno de desarrollo (junto con los microfrontends remotos):
 
    ```bash
-   npm run dev
+   npm run preview
    ```
 
 > Asegúrate de tener corriendo también los proyectos `potter-app` y `rick-and-morty-app` en sus respectivos puertos (`4174` y `5173`).

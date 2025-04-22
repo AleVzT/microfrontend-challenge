@@ -71,7 +71,7 @@ npm install
 Correr entorno de desarrollo (requiere que `host-app` esté levantado en el puerto `5174`):
 
 ```bash
-npm run dev
+npm run preview
 ```
 
 ## 💡 Notas
