@@ -16,8 +16,8 @@ export const useCharacters = () => {
         }
         const data = await response.json();
         setCharacters(data.slice(0, 20));
-      } catch (error: any) {
-        setError(error.message);
+      } catch (err: unknown) {
+        setError(err instanceof Error ? err.message : String(err));
       } finally {
         setLoading(false);
       }
