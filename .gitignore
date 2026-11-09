@@ -1,0 +1,23 @@
+# Dependencies and build output (all apps)
+node_modules/
+dist/
+dist-ssr/
+coverage/
+*.tsbuildinfo
+.__mf__temp/
+
+# Environment files: only the documented examples are committed
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editors / OS
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
