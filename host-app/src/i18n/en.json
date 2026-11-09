@@ -24,5 +24,7 @@
     "location": "Location",
     "episodes": "Episodes",
     "loading": "Loading...",
-    "error": "Error loading characters"
+    "error": "Error loading characters",
+    "remoteLoading": "Loading remote module...",
+    "remoteError": "Could not load {{name}}"
 }
