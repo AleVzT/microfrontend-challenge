@@ -1,85 +1,19 @@
+# rick-and-morty-app
 
-# 🛸 Rick and Morty App - Microfrontend
+Remote microfrontend of the [microfrontends project](../README.md). It lists characters from [The Rick and Morty API](https://rickandmortyapi.com/).
 
-Este proyecto corresponde al microfrontend `rick-and-morty-app`, integrado en la `host-app` usando **Module Federation** con `vite-plugin-federation`.
+- **Exposes:** `./App`, consumed by the host as `rickApp/App`.
+- **Consumes:** `host/i18n` when it runs standalone (the host must be running). The URL can be configured in `.env.example`.
+- **Port:** 5173.
 
-## 🚀 Tecnologías
+| Command | Description |
+|---|---|
+| `npm run build` | Type-check and production build (generates `remoteEntry.js`) |
+| `npm run preview` | Serve the build, which is how the host consumes this remote |
+| `npm run dev` | Development server for standalone work |
+| `npm run lint` | ESLint |
+| `npm test` / `npm run test:ci` | Vitest in watch mode / single run |
 
-- ⚡ [Vite](https://vitejs.dev/)
-- 🧩 [vite-plugin-federation](https://github.com/originjs/vite-plugin-federation)
-- ⚛️ React + TypeScript
-- 🧪 [Vitest](https://vitest.dev/)
-- 🌍 [i18next](https://www.i18next.com/) para internacionalización (i18n)
+Structure: `hooks/useCharacters` (data fetching), `pages/CharactersPage` (states and list), `components/CharacterCard` (presentation).
 
-## 📦 Estructura del Proyecto
-
-```
-rick-and-morty-app/
-├── src/
-│   ├── components/   # Componentes reutilizables
-│   ├── hooks/        # Custom hooks
-│   ├── pages/        # Páginas del microfrontend
-│   ├── styles/       # Estilos globales y locales
-│   └── types/        # Tipado y modelos
-├── index.html
-├── vite.config.ts    # Configuración de federación
-└── ...
-```
-
-## 🔗 Dependencias Remotas
-
-Este microfrontend también consume recursos del `host-app`, como las traducciones compartidas por i18n, mediante la siguiente configuración:
-
-```ts
-remotes: {
-  host: 'http://localhost:5174/assets/remoteEntry.js'
-}
-```
-
-## ⚙️ Scripts
-
-| Comando       | Descripción                           |
-|--------------|---------------------------------------|
-| `npm run dev`     | Inicia el servidor de desarrollo      |
-| `npm run build`   | Construye la aplicación para producción |
-| `npm run preview` | Previsualiza el build de producción  |
-| `npm run test`    | Ejecuta los tests con Vitest         |
-
-## 🧪 Testing
-
-Este proyecto también utiliza **Vitest** para testing, junto con:
-
-- `@testing-library/react`
-- `@testing-library/jest-dom`
-- `@testing-library/user-event`
-- `jsdom`
-
-Las pruebas están organizadas por componente, en cada carpeta correspondiente, con la convención `.test.tsx`.
-
-```bash
-npm run test
-```
-
-## 📦 Build y uso
-
-Instalar dependencias:
-
-```bash
-npm install
-```
-
-Correr entorno de desarrollo (requiere que `host-app` esté levantado en el puerto `5174`):
-
-```bash
-npm run preview
-```
-
-## 💡 Notas
-
-- Las traducciones se cargan desde el host de forma remota utilizando i18n.
-- Este microfrontend fue desarrollado como parte de un challenge técnico.
-
-## 👤 Autor
-
-Alexandro García ✨  
-Challenge técnico para [N5](https://www.n5now.com/)
+See the [root README](../README.md) for the architecture, setup and known limitations.
