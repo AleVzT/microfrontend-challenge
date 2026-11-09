@@ -21,7 +21,7 @@ describe('useCharacters', () => {
   });
 
   it('debería obtener y retornar los personajes correctamente', async () => {
-    global.fetch = vi.fn().mockResolvedValueOnce({
+    globalThis.fetch = vi.fn().mockResolvedValueOnce({
       ok: true,
       json: () => Promise.resolve(mockCharacters),
     } as Partial<Response>) as typeof fetch;
@@ -37,7 +37,7 @@ describe('useCharacters', () => {
   });
 
   it('debería manejar error si el response no es ok', async () => {
-    global.fetch = vi.fn().mockResolvedValueOnce({
+    globalThis.fetch = vi.fn().mockResolvedValueOnce({
       ok: false,
     } as Partial<Response>) as typeof fetch;
 
@@ -52,7 +52,7 @@ describe('useCharacters', () => {
   });
 
   it('debería manejar excepciones si fetch falla', async () => {
-    global.fetch = vi.fn().mockRejectedValueOnce(new Error('Network error'));
+    globalThis.fetch = vi.fn().mockRejectedValueOnce(new Error('Network error'));
 
     const { result } = renderHook(() => useCharacters());
 

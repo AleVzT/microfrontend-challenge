@@ -16,10 +16,10 @@ import { useCharacters } from '../hooks/useCharacters';
 
 describe('CharactersPage', () => {
   it('muestra loading cuando está cargando', () => {
-    (useCharacters as jest.Mock).mockReturnValue({
+    vi.mocked(useCharacters).mockReturnValue({
       characters: [],
       loading: true,
-      error: false,
+      error: null,
     });
 
     render(<CharactersPage />);
@@ -27,10 +27,10 @@ describe('CharactersPage', () => {
   });
 
   it('muestra error cuando hay un error', () => {
-    (useCharacters as jest.Mock).mockReturnValue({
+    vi.mocked(useCharacters).mockReturnValue({
       characters: [],
       loading: false,
-      error: true,
+      error: 'Network error',
     });
 
     render(<CharactersPage />);
@@ -38,7 +38,7 @@ describe('CharactersPage', () => {
   });
 
   it('renderiza personajes correctamente', () => {
-    (useCharacters as jest.Mock).mockReturnValue({
+    vi.mocked(useCharacters).mockReturnValue({
       characters: [
         {
           id: 1,
@@ -53,7 +53,7 @@ describe('CharactersPage', () => {
         },
       ],
       loading: false,
-      error: false,
+      error: null,
     });
 
     render(<CharactersPage />);

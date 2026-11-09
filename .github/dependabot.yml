@@ -1,0 +1,15 @@
+version: 2
+updates:
+  # One entry per app: each microfrontend keeps its own lockfile.
+  - package-ecosystem: npm
+    directories: ['/host-app', '/rick-and-morty-app', '/potter-app']
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 3
+    groups:
+      minor-and-patch:
+        update-types: [minor, patch]
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly

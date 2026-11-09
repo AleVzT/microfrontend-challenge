@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Character } from '../types/character';
 import { useTranslation } from 'react-i18next';
+import { PLACEHOLDER_IMAGE } from '../constants/placeholderImage';
 
 const Card = styled.div`
   width: 240px;
@@ -48,7 +49,7 @@ export const CharacterCard = ({
 
   return (
     <Card>
-      <CardImage src={image || '/placeholder.png'} alt={name} />
+      <CardImage src={image || PLACEHOLDER_IMAGE} alt={name} />
       <CardName>{name}</CardName>
       <CardInfo>
         <p><strong>{t('status')}:</strong> {status}</p>

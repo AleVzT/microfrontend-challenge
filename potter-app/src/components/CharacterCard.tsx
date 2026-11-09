@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import { Character } from '../types/character';
+import { PLACEHOLDER_IMAGE } from '../constants/placeholderImage';
 
 const Card = styled.div`
   width: 240px;
@@ -34,13 +35,15 @@ const CardInfo = styled.div`
   gap: 0.3rem;
 `;
 
-const Badge = styled.span<{ house: string }>`
+// `$house` is a transient prop: styled-components uses it for styling
+// and does not forward it to the DOM element.
+const Badge = styled.span<{ $house: string }>`
   display: inline-block;
-  background-color: ${({ house }) =>
-    house === 'Gryffindor' ? '#ae0001' :
-    house === 'Slytherin' ? '#1a472a' :
-    house === 'Hufflepuff' ? '#f0c75e' :
-    house === 'Ravenclaw' ? '#222f5b' :
+  background-color: ${({ $house }) =>
+    $house === 'Gryffindor' ? '#ae0001' :
+    $house === 'Slytherin' ? '#1a472a' :
+    $house === 'Hufflepuff' ? '#f0c75e' :
+    $house === 'Ravenclaw' ? '#222f5b' :
     '#ccc'};
   color: white;
   padding: 2px 6px;
@@ -65,13 +68,17 @@ export const CharacterCard = ({
   return (
     <Card>
       <CardImage
-        src={image || '/placeholder.png'}
+        src={image || PLACEHOLDER_IMAGE}
         alt={name}
-        onError={(e) => ((e.target as HTMLImageElement).src = '/placeholder.png')}
+        onError={(e) => {
+          const img = e.currentTarget;
+          // Guard against an error loop if the fallback itself cannot be loaded.
+          if (img.src !== PLACEHOLDER_IMAGE) img.src = PLACEHOLDER_IMAGE;
+        }}
       />
       <CardName>{name}</CardName>
       <CardInfo>
-        {house && <Badge house={house}>{house}</Badge>}
+        {house && <Badge $house={house}>{house}</Badge>}
         <p><strong>{t('actor')}:</strong> {actor || t('unknown')}</p>
         <p><strong>{t('status')}:</strong> {alive ? '🟢 ' + t('alive') : '⚰️ ' + t('deceased')}</p>
         <p><strong>{t('role')}:</strong> {hogwartsStudent ? t('student') : hogwartsStaff ? t('staff') : t('other')}</p>

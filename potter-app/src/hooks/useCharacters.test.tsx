@@ -1,6 +1,8 @@
 import { renderHook, waitFor } from '@testing-library/react';
 import { useCharacters } from '../hooks/useCharacters';
-import { vi } from 'vitest';
+import { vi, type Mock } from 'vitest';
+
+const mockedFetch = () => fetch as unknown as Mock;
 
 describe('useCharacters', () => {
   const mockData = Array.from({ length: 30 }, (_, i) => ({
@@ -26,7 +28,7 @@ describe('useCharacters', () => {
   });
 
   it('should fetch and return characters', async () => {
-    (fetch as any).mockResolvedValueOnce({
+    mockedFetch().mockResolvedValueOnce({
       ok: true,
       json: async () => mockData
     });
@@ -44,7 +46,7 @@ describe('useCharacters', () => {
   });
 
   it('should handle fetch error', async () => {
-    (fetch as any).mockResolvedValueOnce({
+    mockedFetch().mockResolvedValueOnce({
       ok: false
     });
 
@@ -59,7 +61,7 @@ describe('useCharacters', () => {
   });
 
   it('should catch network error', async () => {
-    (fetch as any).mockRejectedValueOnce(new Error('Network error'));
+    mockedFetch().mockRejectedValueOnce(new Error('Network error'));
 
     const { result } = renderHook(() => useCharacters());
 

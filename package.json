@@ -1,0 +1,17 @@
+{
+  "name": "microfrontends-module-federation",
+  "private": true,
+  "description": "Host + two remote React microfrontends composed at runtime with Module Federation (Vite).",
+  "type": "module",
+  "engines": {
+    "node": "^20.19.0 || ^22.12.0 || >=24.0.0"
+  },
+  "scripts": {
+    "setup": "node scripts/workspace.mjs install",
+    "start": "node scripts/workspace.mjs start",
+    "lint": "node scripts/workspace.mjs run lint",
+    "test": "node scripts/workspace.mjs run test:ci",
+    "build": "node scripts/workspace.mjs run build",
+    "verify": "npm run lint && npm run test && npm run build"
+  }
+}

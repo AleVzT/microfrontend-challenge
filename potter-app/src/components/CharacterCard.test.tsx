@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { CharacterCard } from './CharacterCard';
 import { vi } from 'vitest';
+import { PLACEHOLDER_IMAGE } from '../constants/placeholderImage';
 
 vi.mock('react-i18next', () => ({
   useTranslation: () => ({
@@ -56,7 +57,17 @@ describe('CharacterCard', () => {
 
     const img = screen.getByAltText('Harry Potter');
     fireEvent.error(img);
-    expect(img).toHaveAttribute("src", "/placeholder.png");
+    expect(img).toHaveAttribute('src', PLACEHOLDER_IMAGE);
+  });
+
+  test('does not loop if the placeholder also fails to load', () => {
+    render(<CharacterCard {...mockCharacter} image="" />);
+
+    const img = screen.getByAltText('Harry Potter');
+    expect(img).toHaveAttribute('src', PLACEHOLDER_IMAGE);
+    fireEvent.error(img);
+    fireEvent.error(img);
+    expect(img).toHaveAttribute('src', PLACEHOLDER_IMAGE);
   });
 
   test('displays correct badge for Gryffindor house', () => {

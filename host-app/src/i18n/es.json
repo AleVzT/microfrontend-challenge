@@ -24,5 +24,7 @@
     "location": "Ubicación",
     "episodes": "Episodios",
     "loading": "Cargando...",
-    "error": "Error al cargar personajes"
+    "error": "Error al cargar personajes",
+    "remoteLoading": "Cargando módulo remoto...",
+    "remoteError": "No se pudo cargar {{name}}"
 }
